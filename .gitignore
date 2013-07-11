@@ -42,10 +42,24 @@ profile
 /logs/
 
 # grails-specific excludes
+###################
 bin
 plugins
 target
 target-eclipse
 .link_to_grails_plugins
 
-
+# clojure and lein excludes
+###################
+/target
+/lib
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+.lein-deps-sum
+.lein-failures
+.lein-plugins
+.lein-repl-history
