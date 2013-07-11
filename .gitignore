@@ -1,0 +1,51 @@
+# Build/VCS Systems #
+############
+.svn
+.hg
+/.gradle
+
+# OS generated files #
+######################
+ehthumbs.db
+Icon?
+Thumbs.db
+.DS_Store
+
+# IDE Files #
+######################
+.settings
+.classpath
+.idea/
+*.iml
+.project
+atlassian-ide-plugin.xml
+/out/
+
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+
+# Project specific #
+###################
+/logs/
+
+# grails-specific excludes
+bin
+plugins
+target
+target-eclipse
+.link_to_grails_plugins
+
+
