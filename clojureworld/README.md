@@ -6,7 +6,9 @@ A complete world created in Clojure - with a REST interface!
 
 (use 'clojureworld.core)
 
-[http://localhost:3000/](http://localhost:3000/)
+(start)
+
+[http://localhost:5000/](http://localhost:5000/)
 or
 [http://localhost:3000/hello-world](http://localhost:3000/hello-world)
 
