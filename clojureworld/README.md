@@ -10,7 +10,7 @@ A complete world created in Clojure - with a REST interface!
 
 [http://localhost:5000/](http://localhost:5000/)
 or
-[http://localhost:3000/hello-world](http://localhost:3000/hello-world)
+[http://localhost:5000/hello-world](http://localhost:5000/hello-world)
 
 
 ## License
