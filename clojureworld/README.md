@@ -4,7 +4,7 @@ A complete world created in Clojure - with a REST interface!
 
 ## Usage
 
-(use 'clojureworld.core)
+(use 'clojureworld.rest)
 
 (start)
 
