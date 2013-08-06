@@ -3,6 +3,7 @@
             [clojureworld.core :refer :all ]))
 
 (deftest demo
+
   (testing "Eher eine Demo als ein Test"
 
     ;; SETUP TEST FIXTURE
@@ -10,58 +11,48 @@
     (def fleetschloss (->Location
                         "Fleetschlösschen"
                         "Eine kleine nette Kneipe am Rande der Speicherstadt"
-                        (ref (->LocationState
-                                 #{:bier :bierdeckel :feuerzeug }
-                                 #{}))))
+                        (ref (->LocationState #{:bier :bierdeckel :feuerzeug } #{}))))
 
     (def brook2 (->Location
                   "Holländischer Brook 2"
                   "Ein Büro in der Speicherstadt"
-                  (ref (->LocationState
-                           #{:kram }
-                           #{}))))
+                  (ref (->LocationState #{:kram } #{}))))
 
     (def karlheinz (->Player
                      "Karl-Heinz"
-                     (ref (->PlayerState
-                            nil
-                              #{:olles_taschentuch }))))
+                     (ref (->PlayerState nil #{:olles_taschentuch }))))
 
     ;; TEST INITIAL MOVE
 
     (.move karlheinz brook2)
 
     (is (=
-          (:name (:location (deref (:state-ref karlheinz))))
+          (:name (:location @(:state-ref karlheinz)))
           "Holländischer Brook 2"))
 
     (is (=
-          (:players (deref (:state-ref brook2)))
-            #{karlheinz}
-          ))
+          (:players @(:state-ref brook2))
+            #{karlheinz}))
 
     (is (=
-          (:players (deref (:state-ref fleetschloss)))
-            #{}
-          ))
+          (:players @(:state-ref fleetschloss))
+            #{}))
 
     ;; TEST SUBSEQUENT MOVE
 
     (.move karlheinz fleetschloss)
 
     (is (=
-          (:name (:location (deref (:state-ref karlheinz))))
+          (:name (:location @(:state-ref karlheinz)))
           "Fleetschlösschen"))
 
     (is (=
-          (:players (deref (:state-ref brook2)))
-            #{}
-          ))
+          (:players @(:state-ref brook2))
+            #{}))
 
     (is (=
-          (:players (deref (:state-ref fleetschloss)))
-            #{karlheinz}
-          ))
+          (:players @(:state-ref fleetschloss))
+            #{karlheinz}))
 
 
     ;; TEST GRAB
@@ -69,13 +60,10 @@
     (.grab karlheinz :bier )
 
     (is (=
-          (:inventory (deref (:state-ref karlheinz)))
+          (:inventory @(:state-ref karlheinz))
             #{:bier :olles_taschentuch }))
 
     (is (=
-          (:things (deref (:state-ref fleetschloss)))
+          (:things @(:state-ref fleetschloss))
             #{:bierdeckel :feuerzeug }))
-
     ))
-
-

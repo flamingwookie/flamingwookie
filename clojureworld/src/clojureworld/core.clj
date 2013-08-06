@@ -14,19 +14,19 @@
   LocationActions
   (enter [this player]
     (dosync
-      (alter state-ref assoc :players (conj (:players (deref state-ref)) player))))
+      (alter state-ref assoc :players (conj (:players @state-ref) player))))
   (leave [this player]
     (dosync
-      (alter state-ref assoc :players (disj (:players (deref state-ref)) player))))
+      (alter state-ref assoc :players (disj (:players @state-ref) player))))
   (add-thing [this thing]
     (dosync
-      (alter state-ref assoc :things (conj (:things (deref state-ref)) thing))))
+      (alter state-ref assoc :things (conj (:things @state-ref) thing))))
   (get-thing [this thing]
     (dosync
-      (def thing-from-location (get (:things (deref state-ref)) thing))
+      (def thing-from-location (get (:things @state-ref) thing))
       (if-not (nil? thing-from-location)
         (alter state-ref assoc :things
-          (disj (:things (deref state-ref)) thing-from-location)))
+          (disj (:things @state-ref) thing-from-location)))
       thing-from-location)))
 
 ;; PLAYER
@@ -37,7 +37,7 @@
   (say
     [this words]
     [this words recipient]
-    "Says something - just so or to another player")
+    "Say something - just so or to another player")
   (move
     [this location]
     "Moves the player to another location")
@@ -52,14 +52,13 @@
   (say [this words player] (str "Du sagst zu " (:name player) ": " words))
   (move [this new-location]
     (dosync
-      (def old-location (:location (deref state-ref)))
+      (def old-location (:location @state-ref))
       (if-not (nil? old-location) (.leave old-location this))
       (.enter new-location this)
       (alter state-ref assoc :location new-location)))
   (grab [this thing]
     (dosync
-      (def location (:location (deref state-ref)))
+      (def location (:location @state-ref))
       (def thing-from-location (.get-thing location thing))
       (alter state-ref assoc :inventory
-        (conj (:inventory (deref state-ref)) thing-from-location)))))
-
+        (conj (:inventory @state-ref) thing-from-location)))))
